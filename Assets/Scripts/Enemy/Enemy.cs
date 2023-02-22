@@ -1,7 +1,9 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+ using Unity.VisualScripting;
+ using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(MovementComponent), typeof(HealthComponent), typeof(BoxCollider))]
 public class Enemy : MonoBehaviour
