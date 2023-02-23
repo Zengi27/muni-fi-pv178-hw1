@@ -25,6 +25,7 @@ public class Tower : MonoBehaviour
     // TODO: Modify so they have appropriate price
     public int Price => _price;
 
+
     private void Start()
     {
         _healthComponent.OnDeath += HandleDeath;

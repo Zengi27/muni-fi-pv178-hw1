@@ -9,7 +9,10 @@ public class BasicTower : Tower
 
         if (hitColliders.Length > 0)
         {
-            _objectToPan.transform.LookAt(FindNearestCollider(hitColliders).transform);
+            var target = FindNearestCollider(hitColliders).transform;
+            _objectToPan.transform.LookAt(target);
+            var projectile = Instantiate(_projectilePrefab, _projectileSpawn);
+            projectile.Init(target);
         }
     }
 
