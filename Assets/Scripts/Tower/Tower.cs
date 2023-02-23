@@ -7,6 +7,9 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider), typeof(HealthComponent))]
 public class Tower : MonoBehaviour
 {
+    [SerializeField] protected int _price;
+    [SerializeField] protected int _attackRange;
+    [SerializeField] protected float _timeBetweenShots;
     [SerializeField] protected LayerMask _enemyLayerMask;
     [SerializeField] private HealthComponent _healthComponent;
     [SerializeField] protected Projectile _projectilePrefab;
@@ -20,7 +23,7 @@ public class Tower : MonoBehaviour
     public GameObject BuildingPreview => _previewPrefab;
 
     // TODO: Modify so they have appropriate price
-    public int Price => 10;
+    public int Price => _price;
 
     private void Start()
     {
@@ -34,6 +37,7 @@ public class Tower : MonoBehaviour
 
     private void HandleDeath()
     {
+        
         Destroy(gameObject);
     }
 }

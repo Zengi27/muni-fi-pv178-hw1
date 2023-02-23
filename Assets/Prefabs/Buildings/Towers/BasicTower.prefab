@@ -110,7 +110,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5221894899708270527, guid: 70dd3cb786b458c4f8d809752ac73117, type: 3}
   m_PrefabInstance: {fileID: 4035468047830941821}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-527006054295147059
+--- !u!114 &6347951478532146537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,15 +119,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 8104009214435661762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3d7cb9334bf314da8bed526107a3e0, type: 3}
+  m_Script: {fileID: 11500000, guid: e427cafb1f8d42fdb1c007e0eb0bf363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _price: 75
+  _attackRange: 5
+  _timeBetweenShots: 1.5
   _enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   _healthComponent: {fileID: 4085826606672272908}
   _projectilePrefab: {fileID: 0}
   _boxCollider: {fileID: 6822438128088192289}
-  _objectToPan: {fileID: 0}
-  _projectileSpawn: {fileID: 0}
+  _objectToPan: {fileID: 8393035056185782020}
+  _projectileSpawn: {fileID: 9053428842322676745}
   _previewPrefab: {fileID: 4867485716912935487, guid: c31a04426cfe34946a0b31e154e6b8f1, type: 3}
+--- !u!4 &8393035056185782020 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5510945952753364857, guid: 70dd3cb786b458c4f8d809752ac73117, type: 3}
+  m_PrefabInstance: {fileID: 4035468047830941821}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9053428842322676745 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5018383685696375924, guid: 70dd3cb786b458c4f8d809752ac73117, type: 3}
+  m_PrefabInstance: {fileID: 4035468047830941821}
+  m_PrefabAsset: {fileID: 0}

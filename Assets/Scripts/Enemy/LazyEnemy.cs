@@ -6,11 +6,8 @@ public class LazyEnemy : Enemy
     private const float _movingTime = 5.0f;
     private const float _waitTime = 1.0f;
     private float _timer = _movingTime;
-    private void Start()
-    {
-        _movementComponent.MoveAlongPath();
-    }
     
+
     public void Update()
     {
         _timer -= Time.deltaTime;
@@ -34,15 +31,23 @@ public class LazyEnemy : Enemy
             HandleDeath();
         }
         */
-
-        
     }
-    
+    public void Init(EnemyPath path)
+    {
+        _movementComponent.Init(path, 3);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.name == "Castle")
         {
             collision.collider.GetComponent<HealthComponent>().HealthValue -= 25;
+            HandleDeath();
+        }
+
+        if (collision.collider.name == "BasicTower(Clone)")
+        {
+            collision.collider.GetComponent<HealthComponent>().HealthValue -= 50;
             HandleDeath();
         }
     }

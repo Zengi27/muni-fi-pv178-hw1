@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d029279a0114dda855e39d871700e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _reward: 25
   _movementComponent: {fileID: 4619334968831406506}
   _healthComponent: {fileID: 4538566871457837460}
   _onDeathParticlePrefab: {fileID: 0}

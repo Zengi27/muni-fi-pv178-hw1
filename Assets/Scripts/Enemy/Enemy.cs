@@ -8,6 +8,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(MovementComponent), typeof(HealthComponent), typeof(BoxCollider))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] protected int _reward;
     [SerializeField] protected MovementComponent _movementComponent;
     [SerializeField] protected HealthComponent _healthComponent;
     [SerializeField] protected ParticleSystem _onDeathParticlePrefab;
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _healthComponent.OnDeath += HandleDeath;
+        _movementComponent.MoveAlongPath();
     }
 
     private void OnDestroy()
@@ -35,7 +37,7 @@ public class Enemy : MonoBehaviour
     protected void HandleDeath()
     {
         // TODO: Modify this so they give appropriate reward
-        GameObject.FindObjectOfType<Player>().Resources += 0;
+        GameObject.FindObjectOfType<Player>().Resources += _reward;
         OnDeath?.Invoke();
         Destroy(gameObject);
     }
