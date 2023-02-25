@@ -90,7 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b32ddfad554838950919dfff7b5331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reward: 0
+  _speed: 5
+  _reward: 10
   _movementComponent: {fileID: 2866792057627005200}
   _healthComponent: {fileID: 6426621292390191406}
   _onDeathParticlePrefab: {fileID: 0}

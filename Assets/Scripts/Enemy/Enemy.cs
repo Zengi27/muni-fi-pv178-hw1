@@ -8,6 +8,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(MovementComponent), typeof(HealthComponent), typeof(BoxCollider))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] protected float _speed;
     [SerializeField] protected int _reward;
     [SerializeField] protected MovementComponent _movementComponent;
     [SerializeField] protected HealthComponent _healthComponent;
@@ -31,12 +32,11 @@ public class Enemy : MonoBehaviour
     public void Init(EnemyPath path)
     {
         // TODO: Modify this so they have appropriate speed
-        _movementComponent.Init(path, 5);
+        _movementComponent.Init(path, _speed);
     }
 
     protected void HandleDeath()
     {
-        // TODO: Modify this so they give appropriate reward
         GameObject.FindObjectOfType<Player>().Resources += _reward;
         OnDeath?.Invoke();
         Destroy(gameObject);

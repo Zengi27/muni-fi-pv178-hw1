@@ -22,7 +22,6 @@ public class Tower : MonoBehaviour
     public BoxCollider Collider => _boxCollider;
     public GameObject BuildingPreview => _previewPrefab;
 
-    // TODO: Modify so they have appropriate price
     public int Price => _price;
 
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BasicTower : Tower
 {
-    private float _timer = 0.0f;
+    private float _timer;
     private Projectile _projectile;
     
     public void Update()
@@ -13,16 +13,9 @@ public class BasicTower : Tower
         if (hitColliders.Length > 0)
         {
             var target = FindNearestCollider(hitColliders).transform;
-            _objectToPan.transform.LookAt(target);
             
-            _timer += Time.deltaTime;
-
-            if (_projectile == null)
-            {
-                _projectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
-                _projectile.Init(target);
-                _timer -= _timeBetweenShots;
-            }
+            _objectToPan.transform.LookAt(target);
+            HandleShoot(target);
         }
     }
 
@@ -45,8 +38,16 @@ public class BasicTower : Tower
         return nearestCollider;
     }
 
-    public void Shoot(Transform target)
+    private void HandleShoot(Transform target)
     {
+        _timer += Time.deltaTime;
+
         
+        if (_timer > _timeBetweenShots && _projectile == null)
+        {
+            _projectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
+            _projectile.Init(target);
+            _timer -= _timeBetweenShots;
+        }
     }
 }

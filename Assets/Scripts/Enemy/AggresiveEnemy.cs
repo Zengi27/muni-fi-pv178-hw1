@@ -1,18 +1,28 @@
+using System;
 using UnityEngine;
 
 public class AggresiveEnemy : Enemy
 {
-    public void Init(EnemyPath path)
-    {
-        _movementComponent.Init(path, 5);
-    }
+    private float _attackRange = 10.0f;
 
+    public void Update()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _attackRange, _attackLayerMask);
+
+        if (hitColliders.Length > 0)
+        {
+            var target = hitColliders[0].transform;
+            _movementComponent.MoveTowards(target);
+        }
+        else
+        {
+            _movementComponent.MoveAlongPath();
+        }
+    }
+    
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.name == "Castle")
-        {
-            collision.collider.GetComponent<HealthComponent>().HealthValue -= 40;
-            HandleDeath();
-        }
+        collision.collider.GetComponent<HealthComponent>().HealthValue -= 40;
+        HandleDeath();
     }
 }
