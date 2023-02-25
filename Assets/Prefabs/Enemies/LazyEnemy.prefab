@@ -111,8 +111,8 @@ MonoBehaviour:
   _reward: 25
   _movementComponent: {fileID: 4619334968831406506}
   _healthComponent: {fileID: 4538566871457837460}
-  _onDeathParticlePrefab: {fileID: 0}
-  _onSuccessParticlePrefab: {fileID: 0}
+  _onDeathParticlePrefab: {fileID: 198537984209914932, guid: c01781356bdb52e47950ab35d7629806, type: 3}
+  _onSuccessParticlePrefab: {fileID: 198537984209914932, guid: f936cff0108775d4d85ce4a708e45720, type: 3}
   _attackLayerMask:
     serializedVersion: 2
     m_Bits: 2048

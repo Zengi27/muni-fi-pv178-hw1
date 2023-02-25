@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class BasicTower : Tower
 {
+    private float _timer = 0.0f;
+    private Projectile _projectile;
+    
     public void Update()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _attackRange, _enemyLayerMask);
@@ -11,8 +14,15 @@ public class BasicTower : Tower
         {
             var target = FindNearestCollider(hitColliders).transform;
             _objectToPan.transform.LookAt(target);
-            var projectile = Instantiate(_projectilePrefab, _projectileSpawn);
-            projectile.Init(target);
+            
+            _timer += Time.deltaTime;
+
+            if (_projectile == null)
+            {
+                _projectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
+                _projectile.Init(target);
+                _timer -= _timeBetweenShots;
+            }
         }
     }
 
@@ -23,7 +33,7 @@ public class BasicTower : Tower
         
         foreach (var collider in colliders)
         {
-            float distance = Vector3.Distance(transform.position, colliders[0].transform.position);
+            float distance = Vector3.Distance(transform.position, collider.transform.position);
 
             if (distance < nearestDistance)
             {
@@ -33,5 +43,10 @@ public class BasicTower : Tower
         }
 
         return nearestCollider;
+    }
+
+    public void Shoot(Transform target)
+    {
+        
     }
 }
