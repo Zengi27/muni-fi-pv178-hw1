@@ -6,6 +6,8 @@ public class BurstTower : Tower
     private float _timer;
     private float _secondBulletTimer;
     private int Shot;
+    private Projectile _firstProjectile;
+    private Projectile _secondProjectile;
 
 
     public void Update()
@@ -45,18 +47,17 @@ public class BurstTower : Tower
     {
         _timer += Time.deltaTime;
 
-        if (Shot == 1 && (_secondBulletTimer += Time.deltaTime) > 0.2f)
+        if (_firstProjectile != null && _secondProjectile == null && (_secondBulletTimer += Time.deltaTime) > 0.2f)
         {
-            var _firstProjectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
-            _firstProjectile.Init(target);
-            Shot = 0;
+            _secondProjectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
+            _secondProjectile.Init(target);
         }
         
-        if (_timer > _timeBetweenShots && Shot == 0)
+        if (_timer > _timeBetweenShots && _firstProjectile == null)
         {
-            var _firstProjectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
+            _firstProjectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
             _firstProjectile.Init(target);
-            Shot = 1;
+
             _timer -= _timeBetweenShots;
             _secondBulletTimer = 0;
         }

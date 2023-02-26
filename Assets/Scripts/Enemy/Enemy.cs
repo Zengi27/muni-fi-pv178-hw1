@@ -31,7 +31,6 @@ public class Enemy : MonoBehaviour
 
     public void Init(EnemyPath path)
     {
-        // TODO: Modify this so they have appropriate speed
         _movementComponent.Init(path, _speed);
     }
 

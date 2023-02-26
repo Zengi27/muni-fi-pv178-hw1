@@ -29,7 +29,7 @@ public class LazyEnemy : Enemy
         {
             collision.collider.GetComponent<HealthComponent>().HealthValue -= 25;
         }
-        if (collision.collider.name == "BasicTower(Clone)")
+        else
         {
             collision.collider.GetComponent<HealthComponent>().HealthValue -= 50;
         }
