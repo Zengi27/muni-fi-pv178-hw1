@@ -25,14 +25,14 @@ public abstract class Projectile : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if (_timer > _timeDeath)
+        if (_timer > _timeDeath || _target == null)
         {
             HandleDeath();
         }
 
         if (_target != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _speed * 5.0f *Time.deltaTime);
         }
     }
 

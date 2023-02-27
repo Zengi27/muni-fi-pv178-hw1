@@ -41,7 +41,6 @@ public class BasicTower : Tower
     private void HandleShoot(Transform target)
     {
         _timer += Time.deltaTime;
-
         
         if (_timer > _timeBetweenShots && _projectile == null)
         {

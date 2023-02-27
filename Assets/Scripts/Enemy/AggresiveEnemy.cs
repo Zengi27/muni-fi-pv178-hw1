@@ -22,7 +22,9 @@ public class AggresiveEnemy : Enemy
     
     void OnCollisionEnter(Collision collision)
     {
-        collision.collider.GetComponent<HealthComponent>().HealthValue -= 40;
+        collision.collider.GetComponent<HealthComponent>().HealthValue -= _damage;
+        
         HandleDeath();
+        Instantiate(_onSuccessParticlePrefab, transform.position, transform.rotation);
     }
 }

@@ -7,7 +7,9 @@ public class BasicProjectile : Projectile
         if (collider.TryGetComponent<HealthComponent>(out var healthComponent))
         {
             healthComponent.HealthValue -= _damage;
+
             Destroy(gameObject);
+            Instantiate(_onHitParticleSystem, transform.position, transform.rotation);
         }
     }
 }

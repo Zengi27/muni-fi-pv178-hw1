@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected float _speed;
     [SerializeField] protected int _reward;
+    [SerializeField] protected int _damage;
     [SerializeField] protected MovementComponent _movementComponent;
     [SerializeField] protected HealthComponent _healthComponent;
     [SerializeField] protected ParticleSystem _onDeathParticlePrefab;
@@ -39,5 +40,6 @@ public class Enemy : MonoBehaviour
         GameObject.FindObjectOfType<Player>().Resources += _reward;
         OnDeath?.Invoke();
         Destroy(gameObject);
+        //Instantiate(_onDeathParticlePrefab, transform.position, transform.rotation);
     }
 }

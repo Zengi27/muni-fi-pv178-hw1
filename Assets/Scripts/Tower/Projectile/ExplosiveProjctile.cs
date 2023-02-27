@@ -17,5 +17,6 @@ public class ExplosiveProjctile : Projectile
         }
 
         Destroy(gameObject);
+        Instantiate(_onHitParticleSystem, transform.position, transform.rotation);
     }
 }

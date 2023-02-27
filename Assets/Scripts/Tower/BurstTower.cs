@@ -4,8 +4,7 @@ using UnityEngine;
 public class BurstTower : Tower
 {
     private float _timer;
-    private float _secondBulletTimer;
-    private int Shot;
+    private float _timeBetweenSecondShot = 0.2f;
     private Projectile _firstProjectile;
     private Projectile _secondProjectile;
 
@@ -46,21 +45,20 @@ public class BurstTower : Tower
     private void HandleShoot(Transform target)
     {
         _timer += Time.deltaTime;
-
-        if (_firstProjectile != null && _secondProjectile == null && (_secondBulletTimer += Time.deltaTime) > 0.2f)
-        {
-            _secondProjectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
-            _secondProjectile.Init(target);
-        }
         
         if (_timer > _timeBetweenShots && _firstProjectile == null)
         {
             _firstProjectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
             _firstProjectile.Init(target);
-
-            _timer -= _timeBetweenShots;
-            _secondBulletTimer = 0;
+        
         }
         
+        if (_firstProjectile != null && _secondProjectile == null && _timer > _timeBetweenShots + _timeBetweenSecondShot)
+        {
+            _secondProjectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
+            _secondProjectile.Init(target);
+            
+            _timer -= _timeBetweenShots;
+        }
     }
 }
