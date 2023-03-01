@@ -7,6 +7,8 @@ public class BurstTower : Tower
     private float _timeBetweenSecondShot = 0.2f;
     private Projectile _firstProjectile;
     private Projectile _secondProjectile;
+    private bool waitForSecondBullet = false;
+    private Collider _target;
 
 
     public void Update()
@@ -15,10 +17,15 @@ public class BurstTower : Tower
 
         if (hitColliders.Length > 0)
         {
-            var target = FindEnemyWithMaxHealth(hitColliders).transform;
+            // maybe add && !waitForSecondBullet
+            if (_target == null || !TargetInRange(hitColliders, _target))
+            {
+                _target = FindEnemyWithMaxHealth(hitColliders);
+            }
+            //var target = FindEnemyWithMaxHealth(hitColliders).transform;
             
-            _objectToPan.transform.LookAt(target);
-            HandleShoot(target);
+            _objectToPan.transform.LookAt(_target.transform);
+            HandleShoot(_target.transform);
         }
     }
 
@@ -46,19 +53,18 @@ public class BurstTower : Tower
     {
         _timer += Time.deltaTime;
         
-        if (_timer > _timeBetweenShots && _firstProjectile == null)
+        if (_timer > _timeBetweenShots && !waitForSecondBullet)
         {
-            _firstProjectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
-            _firstProjectile.Init(target);
-        
-        }
-        
-        if (_firstProjectile != null && _secondProjectile == null && _timer > _timeBetweenShots + _timeBetweenSecondShot)
-        {
-            _secondProjectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
-            _secondProjectile.Init(target);
+            Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity).Init(target);
             
-            _timer -= _timeBetweenShots;
+            waitForSecondBullet = true;
+        }
+        if (_timer > _timeBetweenShots + _timeBetweenSecondShot)
+        {
+            Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity).Init(target);
+            Debug.Log("Druha");
+            _timer -= _timeBetweenShots + _timeBetweenSecondShot;
+            waitForSecondBullet = false;
         }
     }
 }

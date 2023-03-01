@@ -40,4 +40,9 @@ public class Tower : MonoBehaviour
         
         Destroy(gameObject);
     }
+    
+    protected bool TargetInRange(Collider[] colliders, Collider target)
+    {
+        return colliders.Contains(target);
+    }
 }

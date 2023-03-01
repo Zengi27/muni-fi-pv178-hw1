@@ -7,7 +7,6 @@ public class RandomTower : Tower
 {
     private Collider _target;
     private float _timer;
-    private Projectile _projectile;
     
     public void Update()
     {
@@ -15,7 +14,7 @@ public class RandomTower : Tower
 
         if (hitColliders.Length > 0)
         {
-            if (_target == null && !TargetInRange(hitColliders, _target))
+            if (_target == null || !TargetInRange(hitColliders, _target))
             {
                 Random random = new Random();
                 int randomNum = random.Next(hitColliders.Length);
@@ -31,33 +30,26 @@ public class RandomTower : Tower
         }
     }
 
-    private bool TargetInRange(Collider[] colliders, Collider target)
-    {
-        return colliders.Contains(target);
-    }
-    
     private void HandleShoot(Transform target)
     {
         _timer += Time.deltaTime;
 
-        if (_timer > _timeBetweenShots && _projectile == null)
+        if (_timer > _timeBetweenShots)
         {
             Random random = new Random();
             int randomNum = random.Next(100);
 
             if (randomNum < 20)
             {
-                _projectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
-                _projectile.Init(target);
-                
+                Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity).Init(target);
                 Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity).Init(target);
                 
                 _timer -= _timeBetweenShots;
             }
             if (randomNum >= 20 && randomNum < 80)
             {
-                _projectile = Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity);
-                _projectile.Init(target);
+                Instantiate(_projectilePrefab, _projectileSpawn.position, Quaternion.identity).Init(target);
+
                 _timer -= _timeBetweenShots;
             }
         }

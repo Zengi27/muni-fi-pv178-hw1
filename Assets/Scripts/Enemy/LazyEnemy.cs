@@ -39,11 +39,17 @@ public class LazyEnemy : Enemy
     {
         if (collider.name == "Castle")
         {
-            collider.GetComponent<HealthComponent>().HealthValue -= _damage;
+            if (collider.TryGetComponent<HealthComponent>(out var healthComponent))
+            {
+                healthComponent.HealthValue -= _damage;
+            }
         }
         else
         {
-            collider.GetComponent<HealthComponent>().HealthValue -= _damage * 2;
+            if (collider.TryGetComponent<HealthComponent>(out var healthComponent))
+            {
+                healthComponent.HealthValue -= _damage * 2;
+            }
         }
     }
 }
