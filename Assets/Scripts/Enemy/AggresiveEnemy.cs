@@ -7,6 +7,27 @@ public class AggresiveEnemy : Enemy
 
     public void Update()
     {
+        Move();
+    }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        TakeDamage(collision.collider);
+        HandleDeath();
+        
+        Instantiate(_onSuccessParticlePrefab, transform.position, transform.rotation);
+    }
+
+    private void TakeDamage(Collider collider)
+    {
+        if (collider.TryGetComponent<HealthComponent>(out var healthComponent))
+        {
+            healthComponent.HealthValue -= _damage;
+        }
+    }
+
+    private void Move()
+    {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _attackRange, _attackLayerMask);
 
         if (hitColliders.Length > 0)
@@ -20,11 +41,5 @@ public class AggresiveEnemy : Enemy
         }
     }
     
-    void OnCollisionEnter(Collision collision)
-    {
-        collision.collider.GetComponent<HealthComponent>().HealthValue -= _damage;
-        
-        HandleDeath();
-        Instantiate(_onSuccessParticlePrefab, transform.position, transform.rotation);
-    }
+    
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(MovementComponent), typeof(HealthComponent), typeof(BoxCollider))]
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected float _speed;
     [SerializeField] protected int _reward;

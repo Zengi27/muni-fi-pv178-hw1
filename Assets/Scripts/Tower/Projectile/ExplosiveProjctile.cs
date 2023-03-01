@@ -6,6 +6,14 @@ public class ExplosiveProjctile : Projectile
     
     private void OnTriggerEnter(Collider collider)
     {
+        Explosion(collider);
+        Destroy(gameObject);
+
+        Instantiate(_onHitParticleSystem, transform.position, transform.rotation);
+    }
+
+    private void Explosion(Collider collider)
+    {
         Collider[] hitColliders = Physics.OverlapSphere(collider.transform.position, _explosiveRange, _enemyLayerMask);
 
         foreach (var col in hitColliders)
@@ -15,8 +23,5 @@ public class ExplosiveProjctile : Projectile
                 healthComponent.HealthValue -= _damage;
             }
         }
-
-        Destroy(gameObject);
-        Instantiate(_onHitParticleSystem, transform.position, transform.rotation);
     }
 }

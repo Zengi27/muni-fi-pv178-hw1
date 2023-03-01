@@ -14,6 +14,7 @@ public abstract class Projectile : MonoBehaviour
     [SerializeField] protected ParticleSystem _onHitParticleSystem;
 
     protected Transform _target;
+    private float _speedMultiplier = 5.0f;
     private float _timer = 0.0f;
     
     public void Init(Transform target)
@@ -29,15 +30,19 @@ public abstract class Projectile : MonoBehaviour
         {
             HandleDeath();
         }
-
         if (_target != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _speed * 5.0f *Time.deltaTime);
+            Move();
         }
     }
 
     protected void HandleDeath()
     {
         Destroy(gameObject);
+    }
+
+    private void Move()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _speed * _speedMultiplier *Time.deltaTime);
     }
 }

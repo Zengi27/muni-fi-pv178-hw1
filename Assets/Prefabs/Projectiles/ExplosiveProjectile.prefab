@@ -61,6 +61,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0af332f87e10465459f59a55fe72d529, type: 3}
+--- !u!54 &2352382514876728135 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2297477123683347098, guid: 0af332f87e10465459f59a55fe72d529, type: 3}
+  m_PrefabInstance: {fileID: 4559630922251119069}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5170618088438434909 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8684815762193327488, guid: 0af332f87e10465459f59a55fe72d529, type: 3}
@@ -81,8 +86,8 @@ MonoBehaviour:
   _damage: 10
   _speed: 5
   _timeDeath: 5
-  _rb: {fileID: 0}
+  _rb: {fileID: 2352382514876728135}
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  _onHitParticleSystem: {fileID: 0}
+  _onHitParticleSystem: {fileID: 198801791596541968, guid: 9ece51bd9b1ecd845994078aefd1ee45, type: 3}

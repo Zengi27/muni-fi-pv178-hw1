@@ -9,6 +9,19 @@ public class LazyEnemy : Enemy
     
     public void Update()
     {
+        LazyMove();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        TakeDamage(collision.collider);
+        HandleDeath();
+
+        Instantiate(_onSuccessParticlePrefab, transform.position, transform.rotation);
+    }
+
+    private void LazyMove()
+    {
         _timer += Time.deltaTime;
 
         if (_movementComponent.IsMoving && _timer > _movingTime)
@@ -16,38 +29,21 @@ public class LazyEnemy : Enemy
             _movementComponent.CancelMovement();
             _timer -= _movingTime;
         }
-
         if (!_movementComponent.IsMoving && _timer > _waitTime)
         {
             _movementComponent.MoveAlongPath();
         }
-        
-        // _timer -= Time.deltaTime;
-        //
-        // if (_movementComponent.IsMoving && _timer <= _endOfTimer)
-        // {
-        //     _movementComponent.CancelMovement();
-        //     _timer += _movingTime + _waitTime;
-        // }
-        //
-        // if (!_movementComponent.IsMoving && _timer <= 5.0f)
-        // {
-        //     _movementComponent.MoveAlongPath();
-        // }
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void TakeDamage(Collider collider)
     {
-        if (collision.collider.name == "Castle")
+        if (collider.name == "Castle")
         {
-            collision.collider.GetComponent<HealthComponent>().HealthValue -= _damage;
+            collider.GetComponent<HealthComponent>().HealthValue -= _damage;
         }
         else
         {
-            collision.collider.GetComponent<HealthComponent>().HealthValue -= _damage * 2;
+            collider.GetComponent<HealthComponent>().HealthValue -= _damage * 2;
         }
-        
-        HandleDeath();
-        Instantiate(_onSuccessParticlePrefab, transform.position, transform.rotation);
     }
 }
