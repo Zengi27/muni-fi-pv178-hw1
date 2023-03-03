@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class LazyEnemy : Enemy
 {
-    private const float _endOfTimer = 0.0f;
     private const float _movingTime = 5.0f;
     private const float _waitTime = 1.0f;
     private float _timer;
@@ -41,7 +40,7 @@ public class LazyEnemy : Enemy
         {
             collider.gameObject.GetComponent<HealthComponent>().HealthValue -= _damage;
         }
-        if (collider.gameObject.GetComponent<Enemy>())
+        if (collider.gameObject.GetComponent<Tower>())
         {
             collider.gameObject.GetComponent<HealthComponent>().HealthValue -= _damage * 2;
         }
