@@ -15,9 +15,9 @@ public class LazyEnemy : Enemy
     private void OnCollisionEnter(Collision collision)
     {
         TakeDamage(collision.collider);
-        HandleDeath();
-
         Instantiate(_onSuccessParticlePrefab, transform.position, transform.rotation);
+
+        HandleDeath();
     }
 
     private void LazyMove()
@@ -37,19 +37,13 @@ public class LazyEnemy : Enemy
 
     private void TakeDamage(Collider collider)
     {
-        if (collider.name == "Castle")
+        if (collider.gameObject.GetComponent<Castle>())
         {
-            if (collider.TryGetComponent<HealthComponent>(out var healthComponent))
-            {
-                healthComponent.HealthValue -= _damage;
-            }
+            collider.gameObject.GetComponent<HealthComponent>().HealthValue -= _damage;
         }
-        else
+        if (collider.gameObject.GetComponent<Enemy>())
         {
-            if (collider.TryGetComponent<HealthComponent>(out var healthComponent))
-            {
-                healthComponent.HealthValue -= _damage * 2;
-            }
+            collider.gameObject.GetComponent<HealthComponent>().HealthValue -= _damage * 2;
         }
     }
 }

@@ -14,9 +14,9 @@ public class AggresiveEnemy : Enemy
     private void OnCollisionEnter(Collision collision)
     {
         TakeDamage(collision.collider);
-        HandleDeath();
-        
         Instantiate(_onSuccessParticlePrefab, transform.position, transform.rotation);
+        
+        HandleDeath();
     }
 
     private void TakeDamage(Collider collider)
