@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class AggresiveEnemy : Enemy
@@ -28,18 +29,30 @@ public class AggresiveEnemy : Enemy
 
     private void Move()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _attackRange, _attackLayerMask);
+        var target = FindTowerInRange();
 
-        if (hitColliders.Length > 0)
+        if (target != null)
         {
-            var target = hitColliders[0].transform;
-            _movementComponent.MoveTowards(target);
+            _movementComponent.MoveTowards(target.transform);
         }
         else
         {
             _movementComponent.MoveAlongPath();
         }
     }
-    
-    
+
+    private Collider FindTowerInRange()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _attackRange, _attackLayerMask);
+
+        foreach (var collider in hitColliders)
+        {
+            if (collider.gameObject.GetComponent<Tower>())
+            {
+                return collider;
+            }
+        }
+
+        return null;
+    }
 }
