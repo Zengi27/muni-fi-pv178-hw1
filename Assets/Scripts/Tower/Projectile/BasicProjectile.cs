@@ -4,15 +4,18 @@ public class BasicProjectile : Projectile
 {
     private void OnTriggerEnter(Collider collider)
     {
-        TakeDamage(collider);
-        Destroy(gameObject);
-
-        Instantiate(_onHitParticleSystem, transform.position, transform.rotation);
+        if (collider.gameObject.GetComponent<Enemy>())
+        {
+            TakeDamage(collider);
+            Instantiate(_onHitParticleSystem, transform.position, transform.rotation);
+            
+            HandleDeath();
+        }
     }
 
     private void TakeDamage(Collider collider)
     {
-        if (collider.TryGetComponent<HealthComponent>(out var healthComponent))
+        if (collider.gameObject.TryGetComponent<HealthComponent>(out var healthComponent))
         {
             healthComponent.HealthValue -= _damage;
         }

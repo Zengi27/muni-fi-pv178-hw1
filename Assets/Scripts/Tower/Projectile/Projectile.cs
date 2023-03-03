@@ -43,6 +43,6 @@ public abstract class Projectile : MonoBehaviour
 
     private void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _speed * _speedMultiplier *Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _speed * _speedMultiplier * Time.deltaTime);
     }
 }

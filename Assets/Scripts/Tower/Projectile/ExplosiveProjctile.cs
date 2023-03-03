@@ -6,10 +6,13 @@ public class ExplosiveProjctile : Projectile
     
     private void OnTriggerEnter(Collider collider)
     {
-        Explosion(collider);
-        Destroy(gameObject);
+        if (collider.gameObject.GetComponent<Enemy>())
+        {
+            Explosion(collider);
+            Instantiate(_onHitParticleSystem, transform.position, transform.rotation);
 
-        Instantiate(_onHitParticleSystem, transform.position, transform.rotation);
+            HandleDeath();
+        }
     }
 
     private void Explosion(Collider collider)
@@ -18,7 +21,7 @@ public class ExplosiveProjctile : Projectile
 
         foreach (var col in hitColliders)
         {
-            if (col.TryGetComponent<HealthComponent>(out var healthComponent))
+            if (col.gameObject.TryGetComponent<HealthComponent>(out var healthComponent))
             {
                 healthComponent.HealthValue -= _damage;
             }
