@@ -8,7 +8,7 @@ public class LazyEnemy : Enemy
     
     public void Update()
     {
-        LazyMove();
+        Move();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -19,7 +19,7 @@ public class LazyEnemy : Enemy
         HandleDeath();
     }
 
-    private void LazyMove()
+    public override void Move()
     {
         _timer += Time.deltaTime;
 
@@ -34,7 +34,7 @@ public class LazyEnemy : Enemy
         }
     }
 
-    private void TakeDamage(Collider collider)
+    public override void TakeDamage(Collider collider)
     {
         if (collider.gameObject.GetComponent<Castle>())
         {

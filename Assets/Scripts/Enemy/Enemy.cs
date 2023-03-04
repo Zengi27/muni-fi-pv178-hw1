@@ -42,4 +42,8 @@ public abstract class Enemy : MonoBehaviour
         Destroy(gameObject);
         //Instantiate(_onDeathParticlePrefab, transform.position, transform.rotation);
     }
+
+    public abstract void Move();
+
+    public abstract void TakeDamage(Collider collider);
 }

@@ -19,15 +19,7 @@ public class AggresiveEnemy : Enemy
         HandleDeath();
     }
 
-    private void TakeDamage(Collider collider)
-    {
-        if (collider.TryGetComponent<HealthComponent>(out var healthComponent))
-        {
-            healthComponent.HealthValue -= _damage;
-        }
-    }
-
-    private void Move()
+    public override void Move()
     {
         var target = FindTowerInRange();
 
@@ -38,6 +30,14 @@ public class AggresiveEnemy : Enemy
         else
         {
             _movementComponent.MoveAlongPath();
+        }
+    }
+    
+    public override void TakeDamage(Collider collider)
+    {
+        if (collider.TryGetComponent<HealthComponent>(out var healthComponent))
+        {
+            healthComponent.HealthValue -= _damage;
         }
     }
 
