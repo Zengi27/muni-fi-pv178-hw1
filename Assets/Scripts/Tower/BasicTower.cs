@@ -16,7 +16,6 @@ public class BasicTower : Tower
             {
                 _target = FindNearestCollider(hitColliders);
             }
-            //var target = FindNearestCollider(hitColliders).transform;
             
             _objectToPan.transform.LookAt(_target.transform);
             HandleShoot(_target.transform);
