@@ -40,7 +40,15 @@ public abstract class Enemy : MonoBehaviour
         GameObject.FindObjectOfType<Player>().Resources += _reward;
         OnDeath?.Invoke();
         Destroy(gameObject);
-        //Instantiate(_onDeathParticlePrefab, transform.position, transform.rotation);
+        Instantiate(_onDeathParticlePrefab, transform.position, transform.rotation);
+    }
+    
+    protected void HandleDeathOnSuccess()
+    {
+        GameObject.FindObjectOfType<Player>().Resources += _reward;
+        OnDeath?.Invoke();
+        Destroy(gameObject);
+        Instantiate(_onSuccessParticlePrefab, transform.position, transform.rotation);
     }
 
     public abstract void Move();

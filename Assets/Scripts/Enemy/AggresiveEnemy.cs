@@ -16,7 +16,7 @@ public class AggresiveEnemy : Enemy
         TakeDamage(collision.collider);
         Instantiate(_onSuccessParticlePrefab, transform.position, transform.rotation);
         
-        HandleDeath();
+        HandleDeathOnSuccess();
     }
 
     public override void Move()
